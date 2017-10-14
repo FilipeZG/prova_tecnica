@@ -18,7 +18,7 @@ public class VoteService {
         boolean votedAlready = voteDao.votedAlready(vote);
 
         if (votedAlready)
-            throw new IllegalArgumentException("You already voted today");
+            throw new RuntimeException("You already voted today");
 
         voteDao.saveVote(vote);
     }

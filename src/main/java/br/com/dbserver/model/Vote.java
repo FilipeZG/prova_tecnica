@@ -32,4 +32,11 @@ public class Vote {
         return dayOfWeek;
     }
 
+    public static Vote createVote(int personId, int restaurantId, DayOfWeek dayOfWeek) {
+        Person person = new Person(personId, "generic person");
+        Restaurant restaurant = new Restaurant(restaurantId, "generic restaurant");
+
+        return new Vote(1, person, restaurant, dayOfWeek);
+    }
+
 }

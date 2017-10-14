@@ -20,6 +20,7 @@ public class VoteDao {
         votes.put(DayOfWeek.WEDNESDAY, new ArrayList<>());
         votes.put(DayOfWeek.FRIDAY, new ArrayList<>());
         votes.put(DayOfWeek.SATURDAY, new ArrayList<>());
+        votes.put(DayOfWeek.SUNDAY, new ArrayList<>());
     }
 
     public List<Vote> listAll(DayOfWeek dayOfWeek) {

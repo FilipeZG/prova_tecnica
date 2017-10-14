@@ -17,32 +17,44 @@ public class RestaurantService {
 
     public List<Restaurant> listAllNotChoosen() {
         List<Restaurant> restaurants = restaurantDao.listAll();
-        List<Restaurant> choosenRestaurants = listAllChoosen();
+        List<Restaurant> chosenRestaurants = listAllChosen();
 
-        restaurants.removeAll(choosenRestaurants);
+        restaurants.removeAll(chosenRestaurants);
 
         return restaurants;
     }
 
-    public List<Restaurant> listAllChoosen() {
-        List<Restaurant> choosenRestaurants = new ArrayList<>();
+    private List<Restaurant> listAllChosen() {
+        List<Restaurant> chosenRestaurants = new ArrayList<>();
 
         int todayCode =  LocalDate.now().getDayOfWeek().getValue();
 
         for (int dayCode = 1; dayCode < todayCode; dayCode++) {
-            choosenRestaurants.add(mostVoted(dayCode));
+            DayOfWeek dayOfWeek = DayOfWeek.of(dayCode);
+
+            chosenRestaurants.add(mostVoted(dayOfWeek));
         }
 
-        return choosenRestaurants;
+        return chosenRestaurants;
     }
 
-    public  Restaurant mostVoted(int dayCode) {
-        DayOfWeek dayOfWeek = DayOfWeek.of(dayCode);
+    public  Restaurant mostVoted(DayOfWeek dayOfWeek) {
+        Restaurant mostVoted = null;
+        Long maxVotes = 0L;
 
-        Map<Restaurant, Long> restaurantLongMap = voteService.listAll(dayOfWeek).stream()
-                                                                                .collect(Collectors.groupingBy(v -> v.getRestaurant(), Collectors.counting()));
+        Map<Restaurant, Long> restaurants = voteService.listAll(dayOfWeek).stream()
+                                                                          .collect(Collectors.groupingBy(v -> v.getRestaurant(), Collectors.counting()));
 
-        return null;
+        for (Restaurant restaurant : restaurants.keySet()) {
+            Long votes = restaurants.get(restaurant);
+
+            if (maxVotes < votes) {
+                mostVoted = restaurant;
+                maxVotes = votes;
+            }
+        }
+
+        return mostVoted;
     }
 
 }
