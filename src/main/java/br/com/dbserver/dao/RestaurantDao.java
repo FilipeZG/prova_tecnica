@@ -23,7 +23,7 @@ public class RestaurantDao {
     }
 
     public List<Restaurant> listAll() {
-        return Collections.unmodifiableList(restaurants);
+        return new ArrayList<>(restaurants);
     }
 
     public Restaurant findById(int id) {

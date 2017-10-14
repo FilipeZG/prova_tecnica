@@ -25,8 +25,7 @@ public class Person {
 
         Person person = (Person) o;
 
-        if (id != person.id) return false;
-        return name != null ? name.equals(person.name) : person.name == null;
+        return id == person.id;
     }
 
     @Override

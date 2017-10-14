@@ -2,6 +2,7 @@ package br.com.dbserver.service;
 
 import br.com.dbserver.dao.RestaurantDao;
 import br.com.dbserver.model.Restaurant;
+import br.com.dbserver.model.Vote;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -32,17 +33,25 @@ public class RestaurantService {
         for (int dayCode = 1; dayCode < todayCode; dayCode++) {
             DayOfWeek dayOfWeek = DayOfWeek.of(dayCode);
 
-            chosenRestaurants.add(mostVoted(dayOfWeek));
+            Restaurant mostVoted = mostVoted(dayOfWeek);
+
+            if (mostVoted != null)
+                chosenRestaurants.add(mostVoted);
         }
 
         return chosenRestaurants;
     }
 
     public  Restaurant mostVoted(DayOfWeek dayOfWeek) {
-        return voteService.listAll(dayOfWeek).stream()
-                                             .collect(Collectors.groupingBy(v -> v.getRestaurant(), Collectors.counting()))
-                                             .entrySet().stream()
-                                                        .max(Map.Entry.comparingByValue()).get().getKey();
+        List<Vote> votes = voteService.listAll(dayOfWeek);
+
+        if (votes.isEmpty())
+            return null;
+
+        return votes.stream()
+                    .collect(Collectors.groupingBy(v -> v.getRestaurant(), Collectors.counting()))
+                    .entrySet().stream()
+                               .max(Map.Entry.comparingByValue()).get().getKey();
     }
 
 }
