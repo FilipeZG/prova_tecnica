@@ -1,6 +1,7 @@
 package br.com.dbserver.service;
 
 import br.com.dbserver.dao.VoteDao;
+import br.com.dbserver.model.Person;
 import br.com.dbserver.model.Vote;
 
 import java.time.DayOfWeek;
@@ -15,12 +16,24 @@ public class VoteService {
     }
 
     public void saveVote(Vote vote) {
-        boolean votedAlready = voteDao.votedAlready(vote);
+        validateVotedAlready(vote);
+        voteDao.saveVote(vote);
+    }
+
+    private void validateVotedAlready(Vote vote) {
+        boolean votedAlready = votedAlready(vote);
 
         if (votedAlready)
             throw new RuntimeException("You already voted today");
+    }
 
-        voteDao.saveVote(vote);
+    public boolean votedAlready(Vote vote) {
+        DayOfWeek dayOfWeek = vote.getDayOfWeek();
+        Person person = vote.getPerson();
+
+        return voteDao.listAll(dayOfWeek).stream()
+                      .filter(v -> v.getPerson().equals(person))
+                      .count() > 0;
     }
 
 }

@@ -27,15 +27,6 @@ public class VoteDao {
         return votes.get(dayOfWeek);
     }
 
-    public boolean votedAlready(Vote vote) {
-        DayOfWeek dayOfWeek = vote.getDayOfWeek();
-        Person person = vote.getPerson();
-
-        return votes.get(dayOfWeek).stream()
-                                   .filter(v -> v.getPerson().equals(person))
-                                   .count() > 0;
-    }
-
     public void saveVote(Vote vote) {
         DayOfWeek dayOfWeek = vote.getDayOfWeek();
         votes.get(dayOfWeek).add(vote);
