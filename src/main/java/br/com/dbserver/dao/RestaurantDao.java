@@ -1,12 +1,9 @@
 package br.com.dbserver.dao;
 
-import br.com.dbserver.model.Person;
 import br.com.dbserver.model.Restaurant;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RestaurantDao {
 
@@ -24,12 +21,6 @@ public class RestaurantDao {
 
     public List<Restaurant> listAll() {
         return new ArrayList<>(restaurants);
-    }
-
-    public Restaurant findById(int id) {
-        return restaurants.stream()
-                .filter(restaurant -> restaurant.getId() == id)
-                .collect(Collectors.toList()).get(0);
     }
 
 }

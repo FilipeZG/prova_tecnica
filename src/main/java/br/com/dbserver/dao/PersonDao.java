@@ -5,8 +5,6 @@ import br.com.dbserver.model.Person;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class PersonDao {
 
@@ -22,12 +20,6 @@ public class PersonDao {
 
     public List<Person> listAll() {
         return Collections.unmodifiableList(persons);
-    }
-
-    public Person findById(int id) {
-        return persons.stream()
-                .filter(person -> person.getId() == id)
-                .collect(Collectors.toList()).get(0);
     }
 
 }

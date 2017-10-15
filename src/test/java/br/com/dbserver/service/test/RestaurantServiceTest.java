@@ -4,6 +4,7 @@ import br.com.dbserver.model.Restaurant;
 import br.com.dbserver.model.Vote;
 import br.com.dbserver.service.RestaurantService;
 import br.com.dbserver.service.VoteService;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +51,17 @@ public class RestaurantServiceTest {
 
         long actualId = restaurantService.mostVoted(DayOfWeek.FRIDAY).getId();
         Assert.assertEquals(3, actualId);
+    }
+
+    @Test
+    public void mostVotedIsNullTest() {
+        Restaurant restaurant = restaurantService.mostVoted(DayOfWeek.FRIDAY);
+        Assert.assertEquals(null, restaurant);
+    }
+
+    @After
+    public void end() {
+        voteService.clear();
     }
 
 }

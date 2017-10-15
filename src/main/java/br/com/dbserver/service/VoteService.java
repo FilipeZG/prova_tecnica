@@ -36,4 +36,14 @@ public class VoteService {
                       .count() > 0;
     }
 
+    public void clear() {
+        for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            voteDao.clear(dayOfWeek);
+        }
+    }
+
+    public void clear(DayOfWeek dayOfWeek) {
+        voteDao.clear(dayOfWeek);
+    }
+
 }

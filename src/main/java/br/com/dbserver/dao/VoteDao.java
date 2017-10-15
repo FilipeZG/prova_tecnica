@@ -32,4 +32,8 @@ public class VoteDao {
         votes.get(dayOfWeek).add(vote);
     }
 
+    public void clear(DayOfWeek dayOfWeek) {
+        votes.get(dayOfWeek).clear();
+    }
+
 }
