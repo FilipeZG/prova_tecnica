@@ -48,7 +48,7 @@ public class AppBean {
         try {
             voteService.saveVote(vote);
         } catch (RuntimeException e) {
-            context.addMessage(null, new FacesMessage(e.getMessage()));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
             return;
         }
 
