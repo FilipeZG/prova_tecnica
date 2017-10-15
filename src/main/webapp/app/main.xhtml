@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:view>
+        <h:head>
+            <title>Lunch Time</title>
+        </h:head>
+
+        <h:body>
+            <h1>Vote</h1>
+            <h:messages id="messages"/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="User: " for="persons" />
+                    <h:selectOneMenu id="persons" value="#{appBean.vote.person}" converter="personConverter">
+                        <f:selectItems value="#{appBean.persons}" var="person" itemValue="#{person}" itemLabel="#{person.name}" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Restaurant: " for="restaurant" />
+                    <h:selectOneMenu id="restaurant" value="#{appBean.vote.restaurant}" converter="restaurantConverter">
+                        <f:selectItems value="#{appBean.restaurants}" var="restaurant" itemValue="#{restaurant}" itemLabel="#{restaurant.name}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton value="Save" action="#{appBean.save}">
+                    <f:ajax execute="@form" render="@form :messages :mostVoted" />
+                </h:commandButton>
+            </h:form>
+
+            <h1>Most Voted</h1>
+            <h:panelGroup id="mostVoted">
+                <h:outputText value="#{appBean.mostVoted.name}"/>
+            </h:panelGroup>
+        </h:body>
+    </f:view>
+</html>

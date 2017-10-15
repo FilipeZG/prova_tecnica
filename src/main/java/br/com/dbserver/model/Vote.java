@@ -28,6 +28,14 @@ public class Vote {
         return restaurant;
     }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
