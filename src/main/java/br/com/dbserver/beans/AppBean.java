@@ -34,7 +34,7 @@ public class AppBean {
 
     @PostConstruct
     private void load() {
-        DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
+        DayOfWeek dayOfWeek = getDayOfWeek();
 
         vote = new Vote(1, null , null, dayOfWeek);
         mostVoted = restaurantService.mostVoted(dayOfWeek);
@@ -56,6 +56,15 @@ public class AppBean {
         context.addMessage(null, new FacesMessage("Success"));
     }
 
+    public String chosenRestaurant() {
+        String chosenRestaurant = mostVoted == null ? "No restaurant chosen" : mostVoted.getName();
+        return String.format("%s - %s", chosenRestaurant, getDayOfWeek().name());
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return LocalDate.now().getDayOfWeek();
+    }
+
     public Vote getVote() {
         return vote;
     }
@@ -66,10 +75,6 @@ public class AppBean {
 
     public List<Person> getPersons() {
         return persons;
-    }
-
-    public Restaurant getMostVoted() {
-        return mostVoted;
     }
 
 }

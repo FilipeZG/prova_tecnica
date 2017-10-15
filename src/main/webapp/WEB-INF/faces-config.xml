@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+    <render-kit>
+        <renderer>
+            <component-family>javax.faces.Messages</component-family>
+            <renderer-type>javax.faces.Messages</renderer-type>
+            <renderer-class>br.com.dbserver.utils.BootstrapMessagesRenderer</renderer-class>
+        </renderer>
+    </render-kit>
 </faces-config>
