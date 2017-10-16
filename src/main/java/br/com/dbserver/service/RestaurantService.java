@@ -10,34 +10,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RestaurantService {
 
     private VoteService voteService = new VoteService();
     private RestaurantDao restaurantDao = new RestaurantDao();
 
-    public List<Restaurant> listAllNotChosen() {
+    public List<Restaurant> listAllNotChosen(DayOfWeek today) {
         List<Restaurant> restaurants = restaurantDao.listAll();
-        List<Restaurant> chosenRestaurants = listAllChosen();
+        List<Restaurant> chosenRestaurants = listAllChosen(today);
 
         restaurants.removeAll(chosenRestaurants);
 
         return restaurants;
     }
 
-    private List<Restaurant> listAllChosen() {
+    private List<Restaurant> listAllChosen(DayOfWeek today) {
         List<Restaurant> chosenRestaurants = new ArrayList<>();
 
-        int todayCode =  LocalDate.now().getDayOfWeek().getValue();
+        int todayCode =  today.getValue();
 
-        for (int dayCode = 1; dayCode < todayCode; dayCode++) {
+        IntStream.range(1, todayCode).forEach(dayCode -> {
             DayOfWeek dayOfWeek = DayOfWeek.of(dayCode);
 
             Restaurant mostVoted = mostVoted(dayOfWeek);
 
             if (mostVoted != null)
                 chosenRestaurants.add(mostVoted);
-        }
+        });
 
         return chosenRestaurants;
     }

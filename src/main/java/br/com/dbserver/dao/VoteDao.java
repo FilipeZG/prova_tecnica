@@ -1,6 +1,5 @@
 package br.com.dbserver.dao;
 
-import br.com.dbserver.model.Person;
 import br.com.dbserver.model.Vote;
 
 import java.time.DayOfWeek;

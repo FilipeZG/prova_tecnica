@@ -34,7 +34,7 @@ public class RestaurantServiceTest {
         Vote vote3 = Vote.createVote(3, 3, DayOfWeek.FRIDAY);
         voteService.saveVote(vote3);
 
-        List<Restaurant> restaurants = restaurantService.listAllNotChosen();
+        List<Restaurant> restaurants = restaurantService.listAllNotChosen(DayOfWeek.SATURDAY);
         Assert.assertEquals(6, restaurants.size());
     }
 

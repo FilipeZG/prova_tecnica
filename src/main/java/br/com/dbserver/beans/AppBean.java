@@ -39,7 +39,7 @@ public class AppBean {
         vote = new Vote(1, null , null, dayOfWeek);
         mostVoted = restaurantService.mostVoted(dayOfWeek);
         persons = personDao.listAll();
-        restaurants = restaurantService.listAllNotChosen();
+        restaurants = restaurantService.listAllNotChosen(dayOfWeek);
     }
 
     public void save() {
@@ -48,7 +48,7 @@ public class AppBean {
         try {
             voteService.saveVote(vote);
         } catch (RuntimeException e) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,e.getMessage(), null));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
             return;
         }
 
