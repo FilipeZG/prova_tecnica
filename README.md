@@ -6,5 +6,5 @@ Para rodar a aplicação é preciso executar o comando mvn wildfly-swarm:run e a
 
 Gostaria de destacar que o código foi desenvolvido de acordo com as práticas de clean code, foi utilizado o Java 8 e o Wildfly Swarm.
 
-Para melhorar o código poderiamos ter mais testes unitários e de integração. Também poderia ter sido utilizado um framework front-end, como Angular ou React, 
+Para melhorar o código poderiamos ter mais testes unitários e de aceitação. Também poderia ter sido utilizado um framework front-end, como Angular ou React, 
 consumindo uma API Rest.
